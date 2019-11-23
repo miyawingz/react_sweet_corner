@@ -1,0 +1,19 @@
+.main-nav {
+    margin: 5px auto;
+    padding-left: 63%;
+    width:37%;
+
+    li {
+        list-style-type: none;
+        display: inline-block;
+        text-align: center;
+        padding:0px 5%;
+    }
+
+    a {
+        color: #754b23;
+        font-size: 0.75rem;
+        text-decoration: none;
+        font-family: sans-serif;
+    }
+}
