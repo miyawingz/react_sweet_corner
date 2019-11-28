@@ -6,7 +6,7 @@ import './home.scss';
 
 export default props => {
     return (
-        <div>
+        <div className="home">
             <div className="content">
                 <div className="main">
                     <p className="subtitle">We cherish the sweet moments...</p>
