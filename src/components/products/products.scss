@@ -1,0 +1,13 @@
+.products {
+    width: 100%;
+
+    h1{
+        text-align: center;
+    }
+
+    .product-item {
+        display: inline-block;
+        width:33%;
+        text-align: center;
+    }
+}
