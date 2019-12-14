@@ -1,6 +1,7 @@
 .products {
     width: 100%;
     padding-bottom: 40px;
+    font-family: sans-serif, 'Times New Roman';
 
     h1 {
         text-align: center;
@@ -11,7 +12,7 @@
         width: 33%;
         text-align: center;
         vertical-align: middle;
-        padding: 0px;
+        padding: 10px 0px;
     }
 
     .product-item:hover {
