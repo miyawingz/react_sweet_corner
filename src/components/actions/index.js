@@ -1,5 +1,6 @@
 import axios from 'axios';
 import types from './types';
+import ProductDetails from '../products/product_details';
 
 export function getSchedule() {
     return async function (dispatch) {
@@ -31,5 +32,22 @@ export function getAllProducts() {
             console.log(error);
         }
 
+    }
+}
+
+const PRODUCT_URL = "http://api.sc.lfzprototypes.com/api/products/";
+export function getProductDetails(id) {
+    return async function (dispatch) {
+        try {
+            const resp = await axios.get(`${PRODUCT_URL}${id}`);
+            dispatch({
+                type: types.GET_PRODUCT_DETAILS,
+                details: resp.data
+            })
+        }
+
+        catch (error) {
+            console.error(error);
+        }
     }
 }
