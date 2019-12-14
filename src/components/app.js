@@ -7,7 +7,8 @@ import Header from './header';
 import Home from './home';
 import Services from './services';
 import Products from './products';
-import ProductDetails from './products/product_details'
+import ProductDetails from './products/product_details';
+import Cart from './cart';
 
 import '../assets/css/app.scss';
 
@@ -16,6 +17,7 @@ const App = () => (
         <div className="container">
             <Header />
             <Route path="/about" component={About} />
+            <Route path="/cart" component={Cart} />
             <Route path="/contact" component={Contact} />
             <Route path="/" exact component={Home} />
             <Route path="/services" component={Services} />
