@@ -7,6 +7,7 @@ import Header from './header';
 import Home from './home';
 import Services from './services';
 import Products from './products';
+import ProductDetails from './products/product_details'
 
 import '../assets/css/app.scss';
 
@@ -18,7 +19,8 @@ const App = () => (
             <Route path="/contact" component={Contact} />
             <Route path="/" exact component={Home} />
             <Route path="/services" component={Services} />
-            <Route path="/products" component={Products} />
+            <Route path="/products" exact component={Products} />
+            <Route path="/products/:product_id" component={ProductDetails} />
             <Footer />
         </div>
     </div>

@@ -10,10 +10,14 @@ class Products extends React.Component {
         this.props.getAllProducts();
     }
 
+    goToDetails(id) {
+        this.props.history.push(`/products/${id}`)
+    }
+
     render() {
         const { products } = this.props;
-        const productItems = products.map(item => {
-            return <ProductItem key={item.id} {...item} />
+        const productItems = products.map(product => {
+            return <ProductItem key={product.id} {...product} goToDetails={this.goToDetails.bind(this,product.id)} />
         })
         return (
             <div className="products" >
