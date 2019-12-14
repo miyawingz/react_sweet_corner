@@ -1,16 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getSchedule } from '../../actions';
+import axios from 'axios';
 import './schedule.scss';
 
 class Schedule extends React.Component {
     componentDidMount() {
-        this.props.getSchedule();
+        axios.get('data/schedule.json').then((resp) => {
+            this.setState({
+                schedule: resp.data.schedule
+            })
+        });
     }
 
     render() {
-        const { schedule } = this.props.schedule;
-        if (schedule) {
+        if (this.state) {
+            const { schedule } = this.state;
             const scheduleRow = schedule.map(v => {
                 return (
                     <div className="scheduleRow" key={v.pid}>
@@ -28,12 +31,4 @@ class Schedule extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        schedule: state.schedule.schedule
-    }
-}
-
-export default connect(mapStateToProps, {
-    getSchedule: getSchedule
-})(Schedule)
+export default Schedule;
