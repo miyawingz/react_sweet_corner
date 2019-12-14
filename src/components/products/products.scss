@@ -1,13 +1,18 @@
 .products {
     width: 100%;
+    padding-bottom:40px;
 
-    h1{
+    h1 {
         text-align: center;
     }
 
     .product-item {
         display: inline-block;
-        width:33%;
+        width: 33%;
         text-align: center;
+    }
+
+    p {
+        font-weight: bold;
     }
 }
