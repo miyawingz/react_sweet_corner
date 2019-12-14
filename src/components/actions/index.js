@@ -1,6 +1,5 @@
 import axios from 'axios';
 import types from './types';
-import ProductDetails from '../products/product_details';
 
 export function getSchedule() {
     return async function (dispatch) {
@@ -51,3 +50,9 @@ export function getProductDetails(id) {
         }
     }
 }
+
+// export function clearProductDetails() {
+//     return ({ type: types.CLEAR_PRODUCT_DETAILS })
+// }
+
+export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS })
