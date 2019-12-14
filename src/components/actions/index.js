@@ -1,5 +1,6 @@
 import axios from 'axios';
 import types from './types';
+import { type } from 'os';
 const BASE_URL = "http://api.sc.lfzprototypes.com";
 
 export function getAllProducts() {
@@ -80,12 +81,34 @@ export const getActiveCart = () => async (dispatch) => {
         const resp = await axios.get(`${BASE_URL}/api/cart`, axiosConfig);
 
         dispatch({
-            type:types.GET_ACTIVE_CART,
-            cart:resp.data
+            type: types.GET_ACTIVE_CART,
+            cart: resp.data
         })
     }
 
     catch (error) {
         console.error('get active cart fail', error);
+    }
+}
+
+export const getCartTotals = () => async (dispatch) => {
+    try {
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'X-Cart-Token': cartToken
+            }
+        }
+
+        const resp = await axios.get(`${BASE_URL}/api/cart/totals`, axiosConfig);
+
+        dispatch({
+            type: types.GET_CART_TOTALS,
+            total: resp.data.total
+        })
+    }
+    
+    catch (error) {
+        console.error('get cart totail fail', error);
     }
 }

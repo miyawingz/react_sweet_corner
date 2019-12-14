@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CartWidget from './cart_widget';
 
 import './nav.scss';
 
@@ -11,6 +12,7 @@ export default props => {
             <li><Link to="/products">PRODUCTS</Link></li>
             <li><Link to="/services">SERVICES</Link></li>
             <li><Link to="/contact">CONTACT</Link></li>
+            <CartWidget />
         </ul>
     )
 }
