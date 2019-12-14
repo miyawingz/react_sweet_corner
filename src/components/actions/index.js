@@ -14,7 +14,7 @@ export function getAllProducts() {
 
         }
         catch (error) {
-            console.error('get all products', error);
+            console.error('get all products fail', error);
         }
 
     }
@@ -31,7 +31,7 @@ export function getProductDetails(id) {
         }
 
         catch (error) {
-            console.error('get product details', error);
+            console.error('get product details fail', error);
         }
     }
 }
@@ -64,6 +64,28 @@ export const addItemToCart = (productId, quantity) => async (dispatch) => {
     }
 
     catch (error) {
-        console.error('add item to cart', error);
+        console.error('add item to cart fail', error);
+    }
+}
+
+export const getActiveCart = () => async (dispatch) => {
+    try {
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'X-Cart-Token': cartToken
+            }
+        }
+
+        const resp = await axios.get(`${BASE_URL}/api/cart`, axiosConfig);
+
+        dispatch({
+            type:types.GET_ACTIVE_CART,
+            cart:resp.data
+        })
+    }
+
+    catch (error) {
+        console.error('get active cart fail', error);
     }
 }
