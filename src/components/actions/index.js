@@ -1,21 +1,7 @@
 import axios from 'axios';
 import types from './types';
-
-export function getSchedule() {
-    return async function (dispatch) {
-        const resp = await axios.get('data/schedule.json');
-
-        dispatch(
-            {
-                type: types.GET_SCHEDULE,
-                schedule: resp.data
-            }
-        );
-    }
-
-}
-
 const BASE_URL = "http://api.sc.lfzprototypes.com";
+
 export function getAllProducts() {
     return async function (dispatch) {
         try {
@@ -28,17 +14,16 @@ export function getAllProducts() {
 
         }
         catch (error) {
-            console.log(error);
+            console.error('get all products', error);
         }
 
     }
 }
 
-const PRODUCT_URL = "http://api.sc.lfzprototypes.com/api/products/";
 export function getProductDetails(id) {
     return async function (dispatch) {
         try {
-            const resp = await axios.get(`${PRODUCT_URL}${id}`);
+            const resp = await axios.get(`${BASE_URL}/api/products/${id}`);
             dispatch({
                 type: types.GET_PRODUCT_DETAILS,
                 details: resp.data
@@ -46,7 +31,7 @@ export function getProductDetails(id) {
         }
 
         catch (error) {
-            console.error(error);
+            console.error('get product details', error);
         }
     }
 }
@@ -56,3 +41,29 @@ export function getProductDetails(id) {
 // }
 
 export const clearProductDetails = () => ({ type: types.CLEAR_PRODUCT_DETAILS })
+
+export const addItemToCart = (productId, quantity) => async (dispatch) => {
+    try {
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'X-Cart-Token': cartToken
+            }
+        }
+
+        const resp = await axios.post(`${BASE_URL}/api/cart/items/${productId}`, {
+            quantity: quantity
+        }, axiosConfig)
+
+        localStorage.setItem('sc-cart-token', resp.data.cartToken);
+
+        dispatch({
+            type: types.ADD_ITEM_TO_CART,
+            cartTotal: resp.data.total
+        })
+    }
+
+    catch (error) {
+        console.error('add item to cart', error);
+    }
+}
