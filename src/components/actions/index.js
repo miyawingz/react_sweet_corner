@@ -1,13 +1,12 @@
 import axios from 'axios';
 import types from './types';
-import { type } from 'os';
 const BASE_URL = "http://api.sc.lfzprototypes.com";
 
 export function getAllProducts() {
     return async function (dispatch) {
         try {
             const resp = await axios.get(`${BASE_URL}/api/products`);
-            console.log('resp',resp);
+            console.log('resp', resp);
 
             dispatch({
                 type: types.GET_ALL_PRODUCTS,
@@ -108,8 +107,43 @@ export const getCartTotals = () => async (dispatch) => {
             total: resp.data.total
         })
     }
-    
+
     catch (error) {
         console.error('get cart totail fail', error);
+    }
+}
+
+export const createGuestOrder = (formValues) => async (dispatch) => {
+    try {
+        const { firstName, lastName, email } = formValues;
+        const cartToken = localStorage.getItem('sc-cart-token');
+        const axiosConfig = {
+            headers: {
+                'X-Cart-Token': cartToken
+            }
+        }
+
+        const resp = await axios.post(`${BASE_URL}/api/orders/guest`, {
+            email: email,
+            firstName: firstName,
+            lastName: lastName
+        }, axiosConfig)
+
+        console.log(resp);
+
+        localStorage.removeItem('sc-cart-token');
+
+        dispatch({
+            type: types.CREATE_GUEST_ORDER,
+            order: resp.data
+        })
+
+        return ({
+            email: email,
+            orderId: resp.data.id
+        })
+    }
+    catch (error) {
+        console.error('create guest order fail', error);
     }
 }
