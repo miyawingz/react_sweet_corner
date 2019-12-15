@@ -13,11 +13,11 @@ class ContactFrom extends React.Component {
 
         return (
             <form onSubmit={handleSubmit(this.userContact)}>
-                <Field name="name" component={Input} />
-                <Field name="email" component={Input} type="email" />
-                <Field name="phone" component={Input} type="tel" />
-                <Field name="subject" component={Input} />
-                <Field name="message" component={Textarea} />
+                <Field name="name" component={Input} placeholder="Name"/>
+                <Field name="email" component={Input} type="email" placeholder="Email" />
+                <Field name="phone" component={Input} type="tel" placeholder="Phone"/>
+                <Field name="subject" component={Input} placeholder="Subject"/>
+                <Field name="message" component={Textarea} placeholder="Message"/>
                 <div>
                     <button type="submit">Send</button>
                 </div>

@@ -8,17 +8,17 @@
         margin-bottom: 5px;
         border: none;
         padding: 0px;
+        padding-left: 15px;
     }
 
     input::placeholder,
     textarea::placeholder {
         color: brown;
-        padding-left: 15px;
-        padding-top: 5px;
     }
 
     textarea {
         height: 115px;
+        padding-top: 5px;
     }
 
     p {
