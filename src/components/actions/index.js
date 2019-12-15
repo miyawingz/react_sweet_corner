@@ -6,7 +6,8 @@ const BASE_URL = "http://api.sc.lfzprototypes.com";
 export function getAllProducts() {
     return async function (dispatch) {
         try {
-            const resp = await axios.get(`${BASE_URL}/api/products`)
+            const resp = await axios.get(`${BASE_URL}/api/products`);
+            console.log('resp',resp);
 
             dispatch({
                 type: types.GET_ALL_PRODUCTS,
