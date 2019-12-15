@@ -2,8 +2,7 @@ import React from 'react';
 import './form.scss';
 
 export default (props) => {
-    const { input, id = input.name, type = "text", meta } = props;
-    const placeholder = input.name.charAt(0).toUpperCase() + input.name.slice(1);
+    const { input, id = input.name, type = "text", meta, placeholder } = props;
 
     return (
         <div className="input-field">
