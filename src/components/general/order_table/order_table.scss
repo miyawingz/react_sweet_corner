@@ -1,0 +1,48 @@
+table {
+    margin: 20px 20px 0px;
+    border-collapse: collapse;
+
+    tr {
+
+        .thumbnail,
+        .each,
+        .quantity {
+            width: 15%;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .name,
+        .total {
+            width: 27.5%;
+        }
+
+        td {
+            text-align: center;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+    }
+
+    tbody {
+        tr {
+            border-bottom: 2px #754b23 solid;
+        }
+    }
+
+    thead,
+    .total,
+    tfoot {
+        font-weight: bold;
+    }
+
+    tfoot {
+        font-size: 2rem;
+
+        td:first-child {
+            text-align: right;
+        }
+    }
+}
