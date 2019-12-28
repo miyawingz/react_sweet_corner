@@ -15,7 +15,8 @@ export default (state = DEFAULT_STATE, action) => {
         }
         case types.GET_ACTIVE_CART:
             return { ...state, ...action.cart }
-        case types.GET_CART_TOTALS, types.DELETE_ITEM_FROM_CART:
+        case types.DELETE_ITEM_FROM_CART:
+        case types.GET_CART_TOTALS:
             return { ...state, total: action.total }
         default:
             return state;
