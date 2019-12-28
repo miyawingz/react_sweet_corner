@@ -20,7 +20,7 @@ class Products extends React.Component {
             return <ProductItem key={product.id} {...product} goToDetails={this.goToDetails.bind(this,product.id)} />
         })
         return (
-            <div className="products" >
+            <div className="products center" >
                 <h1>Shop Our Cupcakes</h1>
                 {productItems}
             </div>

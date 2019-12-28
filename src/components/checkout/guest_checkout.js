@@ -17,7 +17,7 @@ class GuestCheckout extends React.Component {
         const { handleSubmit } = this.props;
 
         return (
-            <div className="guest-checkout" >
+            <div className="guest-checkout center" >
                 <h1>Guest Checkout</h1>
                 <form onSubmit={handleSubmit(this.handleGuestCheckout.bind(this))}>
                     <Field name="firstName" component={Input} placeholder="First Name" />

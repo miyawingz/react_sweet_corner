@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getActiveCart } from '../actions';
+import { getActiveCart, deleteItemFromCart } from '../actions';
 import { Link } from 'react-router-dom';
 import Money from '../general/money';
 import './cart.scss';
@@ -10,12 +10,19 @@ class Cart extends React.Component {
         this.props.getActiveCart();
     }
 
+    async handleDelete(e) {
+        const id = e.target.getAttribute('value');
+        const resp = await this.props.deleteItemFromCart(id);
+        this.props.getActiveCart();
+    }
+
+
     render() {
         const { items, total } = this.props.cartItems;
 
-        if (items) {
+        if (items && items.length > 0) {
             const itemElement = items.map(item => {
-                const { productId, thumbnail, name, each, quantity, total } = item;
+                const { productId, thumbnail, name, each, quantity, total, itemId } = item;
                 return (
                     <tr key={productId}>
                         <td className="thumbnail">
@@ -25,12 +32,15 @@ class Cart extends React.Component {
                         <td className="each"><Money penny={each} /></td>
                         <td className="quantity">{quantity}</td>
                         <td className="total"><Money penny={total} /></td>
+                        <td>
+                            <i onClick={this.handleDelete.bind(this)} value={itemId} className="material-icons">delete</i>
+                        </td>
                     </tr>
                 )
             })
 
             return (
-                <div className="cart">
+                <div className="cart center">
                     <h1>Cart</h1>
                     <table>
                         <thead>
@@ -58,8 +68,14 @@ class Cart extends React.Component {
             )
         }
 
+        if (items && items.length == 0) {
+            return (
+                <h1 className="center"> Cart is empty, please add product</h1 >
+            )
+        }
+
         return (
-            <div>Cart Loading...</div>
+            <h1 className="center"> Cart Loading...</h1 >
         )
     }
 }
@@ -71,5 +87,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-    getActiveCart: getActiveCart
+    getActiveCart: getActiveCart,
+    deleteItemFromCart: deleteItemFromCart
 })(Cart);

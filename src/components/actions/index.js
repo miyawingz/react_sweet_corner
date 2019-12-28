@@ -6,7 +6,6 @@ export function getAllProducts() {
     return async function (dispatch) {
         try {
             const resp = await axios.get(`${BASE_URL}/api/products`);
-            console.log('resp', resp);
 
             dispatch({
                 type: types.GET_ALL_PRODUCTS,
@@ -129,8 +128,6 @@ export const createGuestOrder = (formValues) => async (dispatch) => {
             lastName: lastName
         }, axiosConfig)
 
-        console.log(resp);
-
         localStorage.removeItem('sc-cart-token');
 
         dispatch({
@@ -145,5 +142,48 @@ export const createGuestOrder = (formValues) => async (dispatch) => {
     }
     catch (error) {
         console.error('create guest order fail', error);
+    }
+}
+
+export const getGuestOrderDetails = (orderId, email) => async (dispatch) => {
+    try {
+        const resp = await axios.get(`${BASE_URL}/api/orders/guest/${orderId}`, {
+            params: {
+                email: email
+            }
+        })
+
+        dispatch({
+            type: types.GET_GUEST_ORDER_DETAILS,
+            orderDetails: resp.data
+        })
+    }
+    catch (error) {
+        console.error('get guest order details fail', error)
+    }
+
+}
+
+export function deleteItemFromCart(id) {
+    return async function (dispatch) {
+        try {
+            const cartToken = localStorage.getItem('sc-cart-token');
+            const axiosConfig = {
+                headers: {
+                    'X-Cart-Token': cartToken
+                }
+            }
+
+            const resp = await axios.delete(`${BASE_URL}/api/cart/items/${id}`, axiosConfig);
+
+            dispatch({
+                type:types.DELETE_ITEM_FROM_CART,
+                total:resp.data.total
+            })
+        }
+
+        catch (error) {
+            console.error('delete item from cart fail', error.message)
+        }
     }
 }

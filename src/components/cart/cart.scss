@@ -1,11 +1,6 @@
 .cart {
     font-family: sans-serif, 'Times New Roman';
 
-    h1 {
-        text-align: center;
-        font-size: 2rem;
-    }
-
     table {
         margin: 20px 20px 0px;
         border-collapse: collapse;
@@ -28,7 +23,6 @@
             }
 
             td {
-                text-align: center;
                 box-sizing: border-box;
                 padding: 10px;
             }
@@ -49,9 +43,17 @@
         tfoot {
             font-size: 2rem;
 
+            td {
+                padding: 40px 0;
+            }
+
             td:first-child {
                 text-align: right;
             }
+        }
+
+        i:hover {
+            cursor: pointer;
         }
     }
 
@@ -60,11 +62,11 @@
             color: white;
             background-color: #e86b35;
             font-weight: bold;
-            margin: 0px 35% 10px;
+            margin: 0px 35% 20px;
             width: 30%;
             height: 60px;
             font-size: 1.5rem;
-            border:none;
+            border: none;
         }
 
         button:hover {

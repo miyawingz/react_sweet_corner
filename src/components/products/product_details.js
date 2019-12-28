@@ -21,6 +21,15 @@ class ProductDetails extends React.Component {
         this.props.clearProductDetails();
     }
 
+    changeQuantity(e) {
+        const value = parseInt(e.target.value);
+
+        if (!isNaN(value) && value > 0) {
+            this.setState({
+                quantity: value
+            })
+        }
+    }
 
     decrementQuantity() {
         const { quantity } = this.state;
@@ -53,7 +62,7 @@ class ProductDetails extends React.Component {
             const { image, name, cost, caption, description } = details;
             return (
                 <div className="product-details">
-                    <div className="image">
+                    <div className="image center">
                         <img src={image.url} alt={image.altText} />
                     </div>
                     <div className="content">
@@ -61,16 +70,15 @@ class ProductDetails extends React.Component {
                         <p className="caption">{caption}</p>
                         <p className="subtitle">Description</p>
                         <p className="description">{description}</p>
-                        <Money className="cost" penny={cost} />
+                        <p className="cost"><Money penny={cost} /></p>
                         <p className="subtitle">Quantity</p>
                         <div className="cart-quantity">
                             <button className="btn-quantity" onClick={this.decrementQuantity.bind(this)}>-</button>
-                            <div className="quantity">{this.state.quantity}</div>
+                            <input className="quantity center" value={this.state.quantity} onChange={this.changeQuantity.bind(this)}></input>
                             <button className="btn-quantity" onClick={this.incrementQuantity.bind(this)}>+</button>
                             <button className="addToCart" onClick={this.handleAddToCart.bind(this)}>Add To Cart</button>
                         </div>
                     </div>
-
                 </div>
             )
         }
