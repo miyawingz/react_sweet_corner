@@ -6,7 +6,7 @@ export default (props) => {
     const { url, altText } = thumbnail;
 
     return (
-        <div className="product-item" id={id} onClick={goToDetails}>
+        <div className="product-item center" id={id} onClick={goToDetails}>
             <h3 className="name">{name}</h3>
             <img className="thumbnail" src={url} alt={altText} />
             <p className="caption">{caption}</p>

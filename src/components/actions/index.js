@@ -163,3 +163,27 @@ export const getGuestOrderDetails = (orderId, email) => async (dispatch) => {
     }
 
 }
+
+export function deleteItemFromCart(id) {
+    return async function (dispatch) {
+        try {
+            const cartToken = localStorage.getItem('sc-cart-token');
+            const axiosConfig = {
+                headers: {
+                    'X-Cart-Token': cartToken
+                }
+            }
+
+            const resp = await axios.delete(`${BASE_URL}/api/cart/items/${id}`, axiosConfig);
+
+            dispatch({
+                type:types.DELETE_ITEM_FROM_CART,
+                total:resp.data.total
+            })
+        }
+
+        catch (error) {
+            console.error('delete item from cart fail', error.message)
+        }
+    }
+}

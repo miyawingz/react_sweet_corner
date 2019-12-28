@@ -10,10 +10,11 @@ class CartWidget extends React.Component {
 
     render() {
         let items = 0;
-        if (this.props.total) {
+
+        if (this.props.total && Object.keys(this.props.total).length > 0) {
             items = this.props.total.items;
         }
-        
+
         return (
             <li className="cart-widget">
                 <Link to="/cart">
