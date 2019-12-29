@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getActiveCart, deleteItemFromCart } from '../actions';
+import { getActiveCart, deleteItemFromCart, createUserOrder } from '../../actions';
 import { Link } from 'react-router-dom';
 import Money from '../general/money';
 import './cart.scss';
@@ -16,6 +16,29 @@ class Cart extends React.Component {
         this.props.getActiveCart();
     }
 
+    async createUserOrder() {
+        const { user } = this.props
+        await this.props.createUserOrder(user);
+        const { orderId, history } = this.props
+        history.push(`/orders/user/${orderId}`)
+    }
+
+    AuthCheckOut = () => {
+        const { auth } = this.props.user;
+        const userAuth = localStorage.getItem('Authorization');
+        if (auth || userAuth) {
+            return (
+                <button onClick={this.createUserOrder.bind(this)}>Checkout</button>
+            )
+        } else {
+            return (
+                <>
+                    <Link to="/sign-in"><button>Sign In &amp; Checkout</button></Link>
+                    <Link to="/checkout/guest"><button>Checkout As Guest</button></Link>
+                </>
+            )
+        }
+    }
 
     render() {
         const { items, total } = this.props.cartItems;
@@ -58,12 +81,12 @@ class Cart extends React.Component {
                         <tfoot>
                             <tr>
                                 <td colSpan="3">Cart Total:</td>
-                                <td>{total.items}</td>
-                                <td><Money penny={total.cost} /></td>
+                                <td>{total ? total.items : 0}</td>
+                                <td><Money penny={total ? total.cost : 0} /></td>
                             </tr>
                         </tfoot>
                     </table>
-                    <Link to="/checkout/guest"><button>Checkout As Guest</button></Link>
+                    <this.AuthCheckOut />
                 </div>
             )
         }
@@ -82,11 +105,14 @@ class Cart extends React.Component {
 
 function mapStateToProps(state) {
     return ({
-        cartItems: state.cart
+        cartItems: state.cart,
+        user: state.user,
+        orderId: state.orders.orderId
     })
 }
 
 export default connect(mapStateToProps, {
     getActiveCart: getActiveCart,
-    deleteItemFromCart: deleteItemFromCart
+    deleteItemFromCart: deleteItemFromCart,
+    createUserOrder: createUserOrder
 })(Cart);

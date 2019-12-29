@@ -3,12 +3,12 @@ import './checkout.scss';
 import { Field, reduxForm } from 'redux-form';
 import Input from '../general/form/input';
 import { connect } from 'react-redux';
-import { createGuestOrder } from '../actions';
+import { createGuestOrder } from '../../actions';
 
 class GuestCheckout extends React.Component {
     async handleGuestCheckout(formValues) {
-        const orderInfo = await this.props.createGuestOrder(formValues);
-        const { email, orderId } = orderInfo;
+        await this.props.createGuestOrder(formValues);
+        const { email, orderId } = this.props;
         const redirectUrl = `/orders/guest/${orderId}?email=${email}`;
         this.props.history.push(redirectUrl);
     }
@@ -53,7 +53,14 @@ function validate(formValues) {
 
 }
 
-export default connect(null, {
+function mapStateToProps(state) {
+    return ({
+        orderId: state.orders.orderId,
+        email: state.orders.email
+    })
+}
+
+export default connect(mapStateToProps, {
     createGuestOrder: createGuestOrder
 })(reduxForm({
     form: 'guest-checkout',

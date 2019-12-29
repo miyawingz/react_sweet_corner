@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addItemToCart, clearProductDetails, getProductDetails } from '../actions';
+import { addItemToCart, clearProductDetails, getProductDetails } from '../../actions';
 import Money from '../general/money';
 import './product_details.scss';
 
