@@ -1,7 +1,7 @@
 import './products.scss';
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllProducts } from '../actions';
+import { getAllProducts } from '../../actions';
 import ProductItem from './product_item';
 
 

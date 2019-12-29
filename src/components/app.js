@@ -11,6 +11,9 @@ import Home from './home';
 import ProductDetails from './products/product_details';
 import Products from './products';
 import Services from './services';
+import SignIn from './user/sign_in';
+import SignUp from './user/sign_up';
+import UserOrderDetails from './orders/user_order_details';
 
 import '../assets/css/app.scss';
 
@@ -23,10 +26,13 @@ const App = () => (
             <Route path="/contact" component={Contact} />
             <Route path="/checkout/guest" component={GuestCheckout} />
             <Route path="/orders/guest/:order_id" component={GuestOrderDetails} />
+            <Route path="/orders/user/:order_id" component={UserOrderDetails} />
             <Route path="/" exact component={Home} />
             <Route path="/products/:product_id" component={ProductDetails} />
             <Route path="/products" exact component={Products} />
             <Route path="/services" component={Services} />
+            <Route path="/sign-in" component={SignIn} />
+            <Route path="/sign-up" component={SignUp} />
             <Footer />
         </div>
     </div>
